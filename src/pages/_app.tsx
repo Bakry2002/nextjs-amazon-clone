@@ -1,10 +1,16 @@
+import RootLayout from '@/components/RootLayout'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 
+//? react responsive carousel library
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className='font-bodyFont'>
-      <Component {...pageProps} />
+    <div className='font-bodyFont bg-gray-300'>
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
     </div>
   )
 }

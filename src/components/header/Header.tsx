@@ -1,6 +1,8 @@
 
 //? Next components
+//? Next components
 import Image from 'next/image';
+import Link from 'next/link';
 
 //? icons 
 import { BiCaretDown } from 'react-icons/bi';
@@ -16,9 +18,9 @@ function Header() {
         <div className='w-full h-20 bg-amazon_blue text-lightText sticky top-0 z-50'>
             <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
                 {/* Logo */}
-                <div className='header-item-wrapper flex items-center justify-center'>
+                <Link href='/' className='header-item-wrapper flex items-center justify-center'>
                     <Image className='w-28 object-cover mt-1' src={logo} alt="Logo" />
-                </div>
+                </Link>
                 {/* Delivery */}
                 <div className='header-item-wrapper items-center justify-center hidden xl:inline-flex gap-1'>
                     <SlLocationPin/>
@@ -54,7 +56,7 @@ function Header() {
                     <p className='text-white font-bold'>& Favorite</p>
                 </div>
                 {/* Cart */}
-                <div className='flex items-center header-item-wrapper relative'>
+                <Link href="/cart" className='flex items-center header-item-wrapper relative'>
                     <Image 
                         className='w-auto h-8 object-cover' 
                         src={cartIcon} 
@@ -62,7 +64,7 @@ function Header() {
                     />
                     <p className='text-xs sxtext-white font-bold mt-3'>Cart</p>
                     <span className='absolute text-amazon_yellow text-sm top-2 left-[29px] font-semibold'>0</span>
-                </div>
+                </Link>
             </div>
         </div>
     )
