@@ -60,7 +60,7 @@ function Header() {
                         src={cartIcon} 
                         alt="Cart image" 
                     />
-                    <p className='text-xs text-white font-bold mt-3'>Cart</p>
+                    <p className='text-xs sxtext-white font-bold mt-3'>Cart</p>
                     <span className='absolute text-amazon_yellow text-sm top-2 left-[29px] font-semibold'>0</span>
                 </div>
             </div>
