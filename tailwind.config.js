@@ -23,7 +23,10 @@ module.exports = {
         amazon_orange: '#FF9900',
         amazon_yellow: '#FEBD69',
         lightText: '#CCC', 
-      }
+      }, 
+      fontFamily: {
+        bodyFont: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],
