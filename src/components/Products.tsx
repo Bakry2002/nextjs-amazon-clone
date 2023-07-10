@@ -14,6 +14,7 @@ import { formattedPrice } from './../helper';
 import { addToCart, addToFavorite } from '@/store/nextSlice';
 //? react-redux hooks
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 
 const Products = ({productData} : any) => { // typescript (any) => means any type of data can be passed in
     const dispatch = useDispatch();
@@ -24,11 +25,25 @@ const Products = ({productData} : any) => { // typescript (any) => means any typ
                 productData.map(({ _id, title, brand, category, description, image, isNew, oldPrice, price } : ProductProps) => (
                     <div key={_id} className='w-full bg-white text-black p-4 border border-gary-300 rounded-lg group overflow-hidden'>
                         <div className='w-full h-[260px] relative'>
-                            <Image 
-                                width={300} height={300} 
-                                src={image} alt='productImage' 
-                                className='w-full h-full object-cover scale-90 hover:scale-100 transition-transform duration-300'
-                            />
+                            <Link href={{
+                                pathname: `/${_id}`,
+                                query: {
+                                    title, 
+                                    brand, 
+                                    category, 
+                                    description, 
+                                    image, 
+                                    isNew, 
+                                    oldPrice, 
+                                    price, 
+                                }
+                            }}>
+                                <Image 
+                                    width={300} height={300} 
+                                    src={image} alt='productImage' 
+                                    className='w-full h-full object-cover scale-90 hover:scale-100 transition-transform duration-300'
+                                />
+                            </Link>
                             <div className='w-12 h-24 absolute bottom-10 right-0 border-[1px] border-gray-400 bg-white rounded-md flex flex-col translate-x-20 group-hover:translate-x-0 transition-transform duration-300'>
                                 <span 
                                     className='w-full h-full border border-b-[1px] border-gray-400 flex items-center justify-center text-xl bg-transparent hover:bg-amazon_yellow cursor-pointer duration-300'
