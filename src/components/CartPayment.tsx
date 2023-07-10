@@ -11,6 +11,7 @@ const CartPayment = () => {
         (state: StateProps) => state.next
     );
     const [totalAmount, setTotalAmount] = useState(0);
+
     useEffect(() => {
         let amount = 0;
         productData.map((item: StoreProps) => {
@@ -21,6 +22,7 @@ const CartPayment = () => {
     }, [productData]);
 
     // =========== Stripe payment =========== 
+
     const stripePromise = loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
     );
