@@ -12,14 +12,31 @@ import logo from '../../images/logo.png';
 import cartIcon from '../../images/cartIcon.png';
 
 //? redux-react hooks
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 //? typescript types
 import { StateProps } from '../../../type';
 
+//? next-auth
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useEffect } from 'react';
+import { addUser } from '@/store/nextSlice';
+
 
 function Header() {
-    const { productData, favoriteData } = useSelector((state: StateProps) => state.next);
+    const dispatch = useDispatch();
+    const { productData, favoriteData, userInfo } = useSelector((state: StateProps) => state.next);
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        if (session) {
+            dispatch(addUser({
+                name: session?.user?.name,
+                email: session?.user?.email,
+                image: session?.user?.image,
+            }))
+        }
+    }, [session])
     return (
         <div className='w-full h-20 bg-amazon_blue text-lightText sticky top-0 z-50'>
             <div className='h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-4'>
@@ -47,15 +64,30 @@ function Header() {
                     </span>
                 </div>
                 {/* Signin */}
-                <div className='text-xs text-gray-100 flex flex-col justify-center header-item-wrapper'>
-                    <p>Hello, sign in</p>
-                    <p className='text-white font-bold flex items-center'>
-                        Account & Lists{" "}
-                        <span>
-                            <BiCaretDown/>
-                        </span>
-                    </p>
-                </div>
+                {
+                    userInfo ? (
+                        <div className='flex items-center px-2 border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] gap-1'>
+                            <img src={userInfo.image} alt="userImage" className='w-8 h-8 rounded-full object-cover'/>
+                            <div className='text-xs text-gray-100 flex flex-col justify-between'>
+                                <p className='text-white font-bold'>{userInfo.name}</p>
+                                <p>{userInfo.email}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div 
+                            className='text-xs text-gray-100 flex flex-col justify-center header-item-wrapper'
+                            onClick={() => signIn()}
+                        > 
+                            <p>Hello, sign in</p>
+                            <p className='text-white font-bold flex items-center'>
+                                Account & Lists{" "}
+                                <span>
+                                    <BiCaretDown/>
+                                </span>
+                            </p>
+                        </div>
+                    )
+                }
                 {/* Favorite */}
                 <div className='text-xs text-gray-100 flex flex-col justify-center header-item-wrapper relative'>
                     <p>Marked</p>
