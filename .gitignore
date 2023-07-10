@@ -34,5 +34,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Visual Studio Code
+.vscode 
 
 What_we_used.txt
