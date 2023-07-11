@@ -34,9 +34,13 @@ function BottomHeader() {
             <p className='hidden md:inline-flex items-center h-8 header-item-wrapper'>
                 Sell
             </p>
-            <button onClick={handleSignOut} className='hidden md:inline-flex items-center h-8 px-2 border border-transparent hover:border-red-600 text-amazon_yellow hover:text-red-400 duration-300 cursor-pointer'>
-                Sign Out
-            </button>
+            {
+                userInfo && (
+                    <button onClick={handleSignOut} className='hidden md:inline-flex items-center h-8 px-2 border border-transparent hover:border-red-600 text-amazon_yellow hover:text-red-400 duration-300 cursor-pointer'>
+                        Sign Out
+                    </button>
+                )
+            }
         </div>  
     )
 }
