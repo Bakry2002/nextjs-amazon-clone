@@ -3,12 +3,20 @@ import Products from "@/components/Products";
 
 //? ts types 
 import { ProductProps } from "../../type";
+import { useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import { setAllProducts } from "@/store/nextSlice";
 
 interface Props {
   products: ProductProps;
 }
 
 export default function Home({products} : Props) { 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setAllProducts({allProducts: products}))
+  }, [products])
   return (
     <main>
       <div className='max-w-screen-2xl mx-auto'>
